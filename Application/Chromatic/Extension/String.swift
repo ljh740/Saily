@@ -11,7 +11,7 @@ import UIKit
 
 extension String {
     func getQRCodeImage() -> UIImage? {
-        let data = self.data(using: String.Encoding.ascii)
+        let data = data(using: String.Encoding.ascii)
         if let filter = CIFilter(name: "CIQRCodeGenerator") {
             filter.setValue(data, forKey: "inputMessage")
             let transform = CGAffineTransform(scaleX: 10, y: 10)
@@ -64,7 +64,7 @@ extension StringProtocol {
 
     func ranges<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> [Range<Index>] {
         var result: [Range<Index>] = []
-        var startIndex = self.startIndex
+        var startIndex = startIndex
         while startIndex < endIndex,
               let range = self[startIndex...]
               .range(of: string, options: options)
@@ -80,6 +80,6 @@ extension StringProtocol {
 extension Array where Element == String {
     func invisibleSpacePadding() -> Self {
         // padding it 🥺
-        map { "⁠\u{200b}   \($0)⁠   \u{200b}" }
+        map { "⁠\u{200b}  \($0)  \u{200b}" }
     }
 }

@@ -11,8 +11,7 @@ import UIKit
 class LXSplitController: UISplitViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        preferredDisplayMode = .allVisible
+        preferredDisplayMode = .oneBesideSecondary
         applySplitWidth()
     }
 
@@ -44,8 +43,8 @@ class LXSplitController: UISplitViewController {
     }
 
     func applySplitWidth() {
-        preferredPrimaryColumnWidthFraction = 0.36
-        maximumPrimaryColumnWidth = 360
-        minimumPrimaryColumnWidth = 360
+        preferredPrimaryColumnWidthFraction = 0.34
+        maximumPrimaryColumnWidth = 340
+        minimumPrimaryColumnWidth = 340
     }
 }

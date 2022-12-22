@@ -67,7 +67,7 @@ class DepictionImageView: DepictionBaseView {
     }
 
     override func depictionHeight(width: CGFloat) -> CGFloat {
-        var height = self.height
+        var height = height
         if self.width > (width - xPadding) {
             height = self.height * (width / self.width)
         }
@@ -77,7 +77,7 @@ class DepictionImageView: DepictionBaseView {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        var width = self.width
+        var width = width
         if width > bounds.width - xPadding {
             width = bounds.width - xPadding
         }
@@ -98,7 +98,7 @@ class DepictionImageView: DepictionBaseView {
             }
         }
 
-        var height = self.height
+        var height = height
         if width != self.width {
             height = self.height * width / self.width
         }

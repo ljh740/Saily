@@ -142,7 +142,8 @@ class RepoPaymentView: UIView {
                         {
                             SDWebImageManager.shared.loadImage(with: url,
                                                                options: .highPriority,
-                                                               progress: nil) { [weak self] image, _, _, _, _, _ in
+                                                               progress: nil)
+                            { [weak self] image, _, _, _, _, _ in
                                 guard self != nil, let image = image else { return }
                                 avatar.image = image
                                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.8, options: .curveEaseInOut, animations: {

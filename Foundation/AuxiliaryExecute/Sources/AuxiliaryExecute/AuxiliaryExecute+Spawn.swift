@@ -22,6 +22,7 @@ public extension AuxiliaryExecute {
         args: [String] = [],
         environment: [String: String] = [:],
         timeout: Double = 0,
+        setPid: ((pid_t) -> Void)? = nil,
         output: ((String) -> Void)? = nil
     )
         -> ExecuteRecipe
@@ -31,7 +32,8 @@ public extension AuxiliaryExecute {
             command: command,
             args: args,
             environment: environment,
-            timeout: timeout
+            timeout: timeout,
+            setPid: setPid
         ) { str in
             outputLock.lock()
             output?(str)
@@ -58,6 +60,7 @@ public extension AuxiliaryExecute {
         args: [String] = [],
         environment: [String: String] = [:],
         timeout: Double = 0,
+        setPid: ((pid_t) -> Void)? = nil,
         stdoutBlock: ((String) -> Void)? = nil,
         stderrBlock: ((String) -> Void)? = nil
     ) -> ExecuteRecipe {
@@ -68,6 +71,7 @@ public extension AuxiliaryExecute {
             args: args,
             environment: environment,
             timeout: timeout,
+            setPid: setPid,
             stdoutBlock: stdoutBlock,
             stderrBlock: stderrBlock
         ) {
@@ -84,14 +88,16 @@ public extension AuxiliaryExecute {
     ///   - args: arg to pass to the binary, exclude argv[0] which is the path itself. eg: ["nya"]
     ///   - environment: any environment to be appended/overwrite when calling posix spawn. eg: ["mua" : "nya"]
     ///   - timeout: any wall timeout if lager than 0, in seconds. eg: 6
-    ///   - stdout: a block call from pipeControlQueue in background when buffer from stdout available for read
-    ///   - stderr: a block call from pipeControlQueue in background when buffer from stderr available for read
-    ///   - completion: a block called from processControlQueue or current queue when the process is finished or an error occurred
+    ///   - setPid: called sync when pid available
+    ///   - stdoutBlock: a block call from pipeControlQueue in background when buffer from stdout available for read
+    ///   - stderrBlock: a block call from pipeControlQueue in background when buffer from stderr available for read
+    ///   - completionBlock: a block called from processControlQueue or current queue when the process is finished or an error occurred
     static func spawn(
         command: String,
         args: [String] = [],
         environment: [String: String] = [:],
         timeout: Double = 0,
+        setPid: ((pid_t) -> Void)? = nil,
         stdoutBlock: ((String) -> Void)? = nil,
         stderrBlock: ((String) -> Void)? = nil,
         completionBlock: ((ExecuteRecipe) -> Void)? = nil
@@ -182,6 +188,8 @@ public extension AuxiliaryExecute {
             return
         }
 
+        setPid?(pid)
+
         close(pipestdout[1])
         close(pipestderr[1])
 
@@ -193,11 +201,16 @@ public extension AuxiliaryExecute {
         let stdoutSource = DispatchSource.makeReadSource(fileDescriptor: pipestdout[0], queue: pipeControlQueue)
         let stderrSource = DispatchSource.makeReadSource(fileDescriptor: pipestderr[0], queue: pipeControlQueue)
 
+        let stdoutSem = DispatchSemaphore(value: 0)
+        let stderrSem = DispatchSemaphore(value: 0)
+
         stdoutSource.setCancelHandler {
             close(pipestdout[0])
+            stdoutSem.signal()
         }
         stderrSource.setCancelHandler {
             close(pipestderr[0])
+            stderrSem.signal()
         }
 
         stdoutSource.setEventHandler {
@@ -253,7 +266,22 @@ public extension AuxiliaryExecute {
         var wait: pid_t = 0
         var isTimeout = false
 
-        func handleProcessExit(isTimeout: Bool, status: Int32) {
+        let timerSource = DispatchSource.makeTimerSource(flags: [], queue: processControlQueue)
+        timerSource.setEventHandler {
+            isTimeout = true
+            kill(pid, SIGKILL)
+        }
+
+        let processSource = DispatchSource.makeProcessSource(identifier: pid, eventMask: .exit, queue: processControlQueue)
+        processSource.setEventHandler {
+            wait = waitpid(pid, &status, 0)
+
+            processSource.cancel()
+            timerSource.cancel()
+
+            stdoutSem.wait()
+            stderrSem.wait()
+
             // by using exactly method, we won't crash it!
             let recipe = ExecuteRecipe(
                 exitCode: Int(exactly: status) ?? -1,
@@ -265,19 +293,10 @@ public extension AuxiliaryExecute {
             )
             completionBlock?(recipe)
         }
-
-        let processSource = DispatchSource.makeProcessSource(identifier: pid, eventMask: .exit, queue: processControlQueue)
-        processSource.setEventHandler {
-            wait = waitpid(pid, &status, 0)
-            processSource.cancel()
-            handleProcessExit(isTimeout: isTimeout, status: status)
-        }
         processSource.resume()
 
         // timeout control
-        processControlQueue.asyncAfter(deadline: wallTimeout) {
-            isTimeout = true
-            kill(pid, SIGKILL)
-        }
+        timerSource.schedule(deadline: wallTimeout)
+        timerSource.resume()
     }
 }

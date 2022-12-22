@@ -31,6 +31,9 @@
 /* Author */
 "AUTHOR" = "Autor";
 
+/* Automatically */
+"AUTOMATICALLY" = "Automatically";
+
 /* Available Versions */
 "AVAILABLE_VERSIONS" = "Versões Disponíveis";
 
@@ -100,6 +103,9 @@
 /* Copy Meta */
 "COPY_META" = "Copiar Meta";
 
+/* Copy Script */
+"COPY_SCRIPT" = "Copy Script";
+
 /* Current Installed */
 "CURRENT_INSTALLED" = "Instalado no momento";
 
@@ -117,6 +123,9 @@
 
 /* Deleted */
 "DELETED" = "Excluído";
+
+/* Depiction */
+"DEPICTION" = "Depiction";
 
 /* Details */
 "DETAILS" = "Detalhes";
@@ -145,6 +154,9 @@
 /* Downgrade */
 "DOWNGRADE" = "Downgrade";
 
+/* Download */
+"DOWNLOAD" = "Download";
+
 /* Your download can be resumed any time. */
 "DOWNLOAD_CAN_RESUME_ANY_TIME" = "Seu download pode ser retomado a qualquer momento.";
 
@@ -153,6 +165,9 @@
 
 /* Downloading */
 "DOWNLOADING" = "Downloading";
+
+/* Dry Run */
+"DRY_RUN" = "Dry Run";
 
 /* Enable History */
 "ENABLE_HISTORY" = "Habilitar Histórico";
@@ -177,6 +192,9 @@
 
 /* Essential package in removal queue, this may brick your device. */
 "ESSENTIAL_PACKAG_IN_REMOVE_QUEUE" = "Pacote essencial na fila de remoção, isso pode danificar seu dispositivo.";
+
+/* Execute */
+"EXECUTE" = "Execute";
 
 /* Failed to create operation payload, incomplete download or broken resources. Please try again later. */
 "FAILED_TO_CREATE_PAYLOAD_MAYBE_DOWNLOAD_FAILED" = "Falha ao criar carga útil de operação, download incompleto ou recursos corrompidos. Por favor, tente novamente mais tarde.";
@@ -253,6 +271,9 @@
 /* Name */
 "NAME" = "Nome";
 
+/* Native */
+"NATIVE" = "Native";
+
 /* Network Timeout */
 "NETWORK_TIMEOUT" = "Tempo Limite de Rede";
 
@@ -268,11 +289,20 @@
 /* No Update Required */
 "NO_UPDATE_REQUIRED" = "Sem atualizações necessárias";
 
+/* None */
+"NONE" = "None";
+
 /* Not Available */
 "NOT_AVAILABLE" = "Não disponível";
 
 /* Not Modified */
 "NOT_MODIFIED" = "Não Modificado";
+
+/* Native Only */
+"ONLY_NATIVE" = "Native Only";
+
+/* Web Only */
+"ONLY_WEB" = "Web Only";
 
 /* Open Download */
 "OPEN_DOWNLOAD" = "Abrir a pasta de downloads";
@@ -409,6 +439,9 @@
 /* Resumed */
 "RESUMED" = "Retomado";
 
+/* Reveal Files */
+"REVEAL_FILES" = "Reveal Files";
+
 /* Search */
 "SEARCH" = "Procurar";
 
@@ -508,6 +541,9 @@
 /* Update When Available */
 "UPDATE_WHEN_AVAILABLE" = "Atualizar quando disponível";
 
+/* User Agent */
+"USER_AGENT" = "User Agent";
+
 /* Validating... */
 "VALIDATING..." = "Validando...";
 
@@ -522,6 +558,9 @@
 
 /* Version Control */
 "VERSION_CONTROL" = "Controle de versão";
+
+/* Web */
+"WEB" = "Web";
 
 /* While the world sleeps, we dream! */
 "WELCOME_CARD_DESC" = "Enquanto o mundo dorme, nós sonhamos.";

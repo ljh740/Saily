@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Timofey Solomko
+// Copyright (c) 2022 Timofey Solomko
 // Licensed under MIT License
 //
 // See LICENSE for license information
@@ -7,7 +7,7 @@ import Foundation
 import SWCompression
 import SwiftCLI
 
-class XZCommand: Command {
+final class XZCommand: Command {
     let name = "xz"
     let shortDescription = "Extracts a XZ archive"
 
@@ -23,12 +23,7 @@ class XZCommand: Command {
         } else if inputURL.pathExtension == "xz" {
             outputURL = inputURL.deletingPathExtension()
         } else {
-            print("""
-            ERROR: Unable to get output path. \
-            No output parameter was specified. \
-            Extension was: \(inputURL.pathExtension)
-            """)
-            exit(1)
+            swcompExit(.noOutputPath)
         }
 
         let fileData = try Data(contentsOf: inputURL, options: .mappedIfSafe)

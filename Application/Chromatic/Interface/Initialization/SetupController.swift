@@ -33,16 +33,7 @@ class SetupViewController: UIViewController {
             return
         }
 
-        var meme = [Character](
-            "🦍🐨🦥🦌🐈‍⬛🐩🐻🦫🦝🐶🐈🦇🦄🦬🦁🦮🦊🐬🐢🐒🐕‍🦺🦧🐕🐼🐺🦔🦓🐱🦈🐿️🐮🐻‍❄️"
-        )
-        while meme.count > 8 {
-            meme.removeRandomElement()
-        }
-
-        descriptionLabel.text = meme
-            .map { String($0) }
-            .joined(separator: " ")
+        descriptionLabel.text = ""
         descriptionLabel.textColor = .gray
         descriptionLabel.font = .monospacedDigitSystemFont(ofSize: 12, weight: .semibold)
         view.addSubview(descriptionLabel)
@@ -87,6 +78,10 @@ class SetupViewController: UIViewController {
             UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         #endif
 
+        if #available(iOS 15.0, *) {
+            UITableView.appearance().sectionHeaderTopPadding = 0.0
+        }
+
         DeviceInfo.current.setupUserAgents()
 
         // MARK: - CENTER
@@ -100,7 +95,6 @@ class SetupViewController: UIViewController {
                 descriptionLabel.text = NSLocalizedString("INITIALIZING_PACKAGES_ENGINE", comment: "Initializing Packages Engine")
             }
             _ = RepositoryCenter.default
-            RepositoryCenter.default.networkingRedirect = cRepositoryRedirection
         }
 
         DispatchQueue.main.async { [self] in
@@ -115,14 +109,14 @@ class SetupViewController: UIViewController {
             let appearance = DropDown.appearance()
             appearance.textColor = UIColor(named: "TEXT_TITLE")!
             appearance.selectedTextColor = UIColor.white
-            appearance.textFont = .roundedFont(ofSize: 18, weight: .semibold)
+            appearance.textFont = .roundedFont(ofSize: 16, weight: .semibold)
             appearance.backgroundColor = UIColor(light: .white,
                                                  dark: .init(hex: 0x2C2C2E)!)
             appearance.shadowColor = .black
             appearance.setupShadowOpacity(0.1)
             appearance.selectionBackgroundColor = UIColor(hex: 0x93D5DC)!
             appearance.layer.shadowOpacity = 0.1
-            appearance.cellHeight = 60
+            appearance.cellHeight = 45
         }
 
         // MARK: - DOWNLOAD ENGINE
@@ -149,10 +143,9 @@ class SetupViewController: UIViewController {
     }
 
     func dispatchAllocInterface() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let target = storyboard.instantiateViewController(withIdentifier: "NavigatorEnterViewController")
-        target.modalPresentationStyle = .fullScreen
-        view.window?.rootViewController = target
+        let controller = NavigatorEnterViewController()
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: false)
         #if DEBUG
             DispatchQueue.global().asyncAfter(deadline: .now() + 6) {
                 InterfaceBridge.removeRecoveryFlag(with: #function, userRequested: false)

@@ -8,6 +8,7 @@
 
 import AptRepository
 import Digger
+import DropDown
 import UIKit
 
 extension SettingView {
@@ -74,7 +75,8 @@ extension SettingView {
                                                   return formatter.string(fromByteCount: Int64(compute))
                                               }) { _, anchor in
             self.dropDownConfirm(anchor: anchor,
-                                 text: NSLocalizedString("DELETE_ALL_DOWNLOADS", comment: "Delete All Downloads")) {
+                                 text: NSLocalizedString("DELETE_ALL_DOWNLOADS", comment: "Delete All Downloads"))
+            {
                 let cache = URL(fileURLWithPath: DiggerCache.cachesDirectory)
                 try? FileManager.default.removeItem(at: cache)
                 let download = CariolNetwork.shared.workingLocation
@@ -101,39 +103,50 @@ extension SettingView {
                                            withAction: { _, _ in
                                                self.parentViewController?.present(next: BlockUpdateController())
                                            })
+        let preferredDepiction = SettingElement(iconSystemNamed: "barcode.viewfinder",
+                                                text: NSLocalizedString("DEPICTION", comment: "Depiction"),
+                                                dataType: .submenuWithAction) {
+            PackageCenter.default.preferredDepiction.localizedDescription()
+        } withAction: { _, dropDownAnchor in
+            let dropDownDataSource = PackageDepiction
+                .PreferredDepiction
+                .allCases
+            let displayDataSource = dropDownDataSource
+                .map { $0.localizedDescription() }
+                .invisibleSpacePadding()
+            let dropDown = DropDown(anchorView: dropDownAnchor, selectionAction: { index, _ in
+                PackageCenter.default.preferredDepiction = dropDownDataSource[safe: index] ?? .automatically
+            }, dataSource: displayDataSource)
+            dropDown.show(onTopOf: dropDownAnchor.window)
+        }
+
         addSubview(backgroundEffect)
         addSubview(openDownloadedPackages)
         addSubview(cleanAllDownload)
         addSubview(softwareAutoUpdateWhenLaunch)
         addSubview(blockedUpdate)
+        addSubview(preferredDepiction)
+
         openDownloadedPackages.snp.makeConstraints { x in
-            x.left.equalTo(safeAnchor.snp.left).offset(8)
-            x.right.equalTo(safeAnchor.snp.right).offset(-8)
-            x.top.equalTo(anchor.snp.bottom).offset(18)
-            x.height.equalTo(28)
+            makeElement(constraint: x, widthAnchor: safeAnchor, topAnchor: anchor)
         }
         anchor = openDownloadedPackages
         cleanAllDownload.snp.makeConstraints { x in
-            x.left.equalTo(safeAnchor.snp.left).offset(8)
-            x.right.equalTo(safeAnchor.snp.right).offset(-8)
-            x.top.equalTo(anchor.snp.bottom).offset(18)
-            x.height.equalTo(28)
+            makeElement(constraint: x, widthAnchor: safeAnchor, topAnchor: anchor)
         }
         anchor = cleanAllDownload
         softwareAutoUpdateWhenLaunch.snp.makeConstraints { x in
-            x.left.equalTo(safeAnchor.snp.left).offset(8)
-            x.right.equalTo(safeAnchor.snp.right).offset(-8)
-            x.top.equalTo(anchor.snp.bottom).offset(18)
-            x.height.equalTo(28)
+            makeElement(constraint: x, widthAnchor: safeAnchor, topAnchor: anchor)
         }
         anchor = softwareAutoUpdateWhenLaunch
         blockedUpdate.snp.makeConstraints { x in
-            x.left.equalTo(safeAnchor.snp.left).offset(8)
-            x.right.equalTo(safeAnchor.snp.right).offset(-8)
-            x.top.equalTo(anchor.snp.bottom).offset(18)
-            x.height.equalTo(28)
+            makeElement(constraint: x, widthAnchor: safeAnchor, topAnchor: anchor)
         }
         anchor = blockedUpdate
+        preferredDepiction.snp.makeConstraints { x in
+            makeElement(constraint: x, widthAnchor: safeAnchor, topAnchor: anchor)
+        }
+        anchor = preferredDepiction
         backgroundEffect.snp.makeConstraints { x in
             x.left.equalTo(safeAnchor.snp.left)
             x.right.equalTo(safeAnchor.snp.right)

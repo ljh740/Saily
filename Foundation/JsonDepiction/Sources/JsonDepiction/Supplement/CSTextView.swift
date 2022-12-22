@@ -54,7 +54,7 @@ internal class CSTextView: UIView, CSTextViewActionHandler {
     }
 
     func process(action: String) -> Bool {
-        let superview = self.superview as? CSTextViewActionHandler
+        let superview = superview as? CSTextViewActionHandler
         return superview?.process(action: action) ?? false
     }
 }
@@ -90,7 +90,7 @@ internal class CSTextRenderView: UIView {
 
         links = []
 
-        guard let attributedText = self.attributedText else {
+        guard let attributedText = attributedText else {
             return
         }
 
@@ -205,8 +205,11 @@ internal class CSTextRenderView: UIView {
             textView?.overlayView.isHidden = true
             textView?.overlayView.frame = .zero
 
-            let url = activeLink["url"] as? URL
-            _ = textView?.process(action: url?.absoluteString ?? "")
+            if let url = activeLink["url"] as? URL {
+                _ = textView?.process(action: url.absoluteString)
+            } else if let str = activeLink["url"] as? String, let url = URL(string: str) {
+                _ = textView?.process(action: url.absoluteString)
+            }
 
             linkActive = false
             activeLink = [:]

@@ -7,6 +7,8 @@
 //
 
 import AptRepository
+import PathListTableViewController
+import SafariServices
 import SPIndicator
 import UIKit
 
@@ -22,10 +24,12 @@ class PackageMenuAction {
         case versionControl
         case blockUpdate
         case unblockUpdate
+        case download
         case collectAndSave
         case collectAndOverwrite
         case removeCollect
         case copyMeta
+        case revealFiles
 
         func describe() -> String {
             switch self {
@@ -49,6 +53,8 @@ class PackageMenuAction {
                 return NSLocalizedString("BLOCK_UPDATE", comment: "Block Update")
             case .unblockUpdate:
                 return NSLocalizedString("UNBLOCK_UPDATE", comment: "Unblock Update")
+            case .download:
+                return NSLocalizedString("DOWNLOAD", comment: "Download")
             case .collectAndSave:
                 return NSLocalizedString("COLLECT_AND_SAVE", comment: "Collect And Save")
             case .collectAndOverwrite:
@@ -57,6 +63,45 @@ class PackageMenuAction {
                 return NSLocalizedString("REMOVE_COLLECT", comment: "Remove Collect")
             case .copyMeta:
                 return NSLocalizedString("COPY_META", comment: "Copy Meta")
+            case .revealFiles:
+                return NSLocalizedString("REVEAL_FILES", comment: "Reveal Files")
+            }
+        }
+
+        func icon() -> UIImage? {
+            switch self {
+            case .directInstall:
+                return UIImage(systemName: "paperplane")
+            case .install:
+                return UIImage(systemName: "arrow.down.square")
+            case .reinstall:
+                return UIImage(systemName: "arrow.clockwise.circle")
+            case .downgrade:
+                return UIImage(systemName: "arrow.down.circle")
+            case .update:
+                return UIImage(systemName: "arrow.up.circle")
+            case .remove:
+                return UIImage(systemName: "xmark.circle")
+            case .cancelQueue:
+                return UIImage(systemName: "circle.dashed")
+            case .versionControl:
+                return UIImage(systemName: "list.triangle")
+            case .blockUpdate:
+                return UIImage(systemName: "hand.raised")
+            case .unblockUpdate:
+                return UIImage(systemName: "face.dashed")
+            case .download:
+                return UIImage(systemName: "icloud.and.arrow.down")
+            case .collectAndSave:
+                return UIImage(systemName: "rosette")
+            case .collectAndOverwrite:
+                return UIImage(systemName: "rosette")
+            case .removeCollect:
+                return UIImage(systemName: "circle.dashed")
+            case .copyMeta:
+                return UIImage(systemName: "circle.dashed")
+            case .revealFiles:
+                return UIImage(systemName: "doc.text.magnifyingglass")
             }
         }
     }
@@ -221,10 +266,14 @@ class PackageMenuAction {
         .init(descriptor: .directInstall,
               block: resolveInstallRequest,
               elegantForPerform: { package in
-                  if package.latestMetadata?[DirectInstallInjectedPackageLocationKey] != nil {
-                      return true
+                  if TaskManager
+                      .shared
+                      .isQueueContains(package: package.identity)
+                  {
+                      return false
                   }
-                  return false
+                  return package
+                      .latestMetadata?[DirectInstallInjectedPackageLocationKey] != nil
               }),
 
         // MARK: - INSTALL
@@ -395,6 +444,31 @@ class PackageMenuAction {
             PackageCenter.default.blockedUpdateTable.contains(package.identity)
         }),
 
+        // MARK: - DOWNLOAD
+
+        .init(descriptor: .download, block: { package, sender in
+            let target = SFSafariViewController(url: package.obtainDownloadLink())
+            target.modalTransitionStyle = .coverVertical
+            target.modalPresentationStyle = .formSheet
+            sender
+                .window?
+                .topMostViewController?
+                .present(target, animated: true, completion: nil)
+        }, elegantForPerform: { package in
+            if let tag = package.latestMetadata?["tag"],
+               tag.contains("cydia::commercial")
+            {
+                return false
+            }
+            if package.obtainDownloadLink() == PackageBadUrl {
+                return false
+            }
+            if package.latestMetadata?[DirectInstallInjectedPackageLocationKey] != nil {
+                return false
+            }
+            return UIApplication.shared.canOpenURL(package.obtainDownloadLink())
+        }),
+
         // MARK: - COLLECT AND SAVE
 
         .init(descriptor: .collectAndSave, block: { package, _ in
@@ -477,6 +551,25 @@ class PackageMenuAction {
                                     completion: nil)
             }
         }, elegantForPerform: { _ in true }),
+
+        // MARK: - REVEAL FILES
+
+        .init(descriptor: .revealFiles, block: { package, view in
+            let path = "/Library/dpkg/info/\(package.identity).list"
+            let controller = PathListTableViewController(path: path)
+            controller.pressToCopy = true
+            controller.showFullPath = true
+            controller.allowSearch = true
+            view
+                .window?
+                .topMostViewController?
+                .present(next: controller)
+        },
+        elegantForPerform: { package in
+            FileManager
+                .default
+                .fileExists(atPath: "/Library/dpkg/info/\(package.identity).list")
+        }),
     ]
 
     // MARK: ACTIONS -

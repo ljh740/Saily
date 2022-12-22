@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -57,6 +57,7 @@
 		5034022426C00B2E00E8D02B /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5034022326C00B2E00E8D02B /* UIWindow.swift */; };
 		5034022626C00C2700E8D02B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5034022526C00C2700E8D02B /* Colors.xcassets */; };
 		5034022926C023FF00E8D02B /* RamLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5034022826C023FF00E8D02B /* RamLogController.swift */; };
+		5037FB6628470117009BB103 /* Tuner in Frameworks */ = {isa = PBXBuildFile; productRef = 5037FB6528470117009BB103 /* Tuner */; };
 		50435E9626DBD35100D3ED25 /* Bugsnag in Frameworks */ = {isa = PBXBuildFile; productRef = 50435E9526DBD35100D3ED25 /* Bugsnag */; };
 		50443FB026F1B4FB00F4EDED /* IBDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50443FAF26F1B4FB00F4EDED /* IBDashboard.swift */; };
 		50443FB626F1D2C600F4EDED /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50443FB226F1D2C600F4EDED /* DashboardController.swift */; };
@@ -110,6 +111,7 @@
 		5091064126C030BA004F978E /* PPShine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5091064026C030BA004F978E /* PPShine.swift */; };
 		5093C24626D158F5004B61B5 /* AptScanner+Install.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093C24526D158F5004B61B5 /* AptScanner+Install.swift */; };
 		5093C24826D163F7004B61B5 /* TaskManager+Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5093C24726D163F7004B61B5 /* TaskManager+Api.swift */; };
+		50940CA227C618D400075B48 /* PathListTableViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 50940CA127C618D400075B48 /* PathListTableViewController */; };
 		50972E2426D5F727008BDCFE /* TaskProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50972E2326D5F727008BDCFE /* TaskProcessor.swift */; };
 		50975F0126C65720004BCBED /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50975F0026C65720004BCBED /* SearchController.swift */; };
 		50975F0326C65910004BCBED /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50975F0226C65910004BCBED /* SearchCell.swift */; };
@@ -270,6 +272,7 @@
 		509C526C26F9C43300116616 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		50A255CC2768F3800078C432 /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 		50A283F026D5E34E005FA2DB /* OperationConsoleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationConsoleController.swift; sourceTree = "<group>"; };
+		50A2D69A27A51101006B61DE /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		50A8052526CB5FA300F8FB7D /* HDRepoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDRepoController.swift; sourceTree = "<group>"; };
 		50A8052A26CB78DF00F8FB7D /* RepoAddController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RepoAddController+Layout.swift"; sourceTree = "<group>"; };
 		50A8052C26CB7D9300F8FB7D /* HDSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDSearchController.swift; sourceTree = "<group>"; };
@@ -287,6 +290,9 @@
 		50C668A826CFB560005A68BE /* PackageVersionControlController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageVersionControlController.swift; sourceTree = "<group>"; };
 		50C668AA26CFE76E005A68BE /* RepoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoCell.swift; sourceTree = "<group>"; };
 		50C88B0926D22ADD00758FEF /* AptScanner+Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AptScanner+Report.swift"; sourceTree = "<group>"; };
+		50CC2FA027A105E700BA2042 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		50CC2FA127A1060400BA2042 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		50CC2FA227A1061700BA2042 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		50CFB01A26D26CC900E66AB9 /* PackageAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageAction.swift; sourceTree = "<group>"; };
 		50D528B82449B11300F4A483 /* chromatic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chromatic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50D528BB2449B11300F4A483 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -320,10 +326,12 @@
 				507D1E8F26BFA8BC00E72E9B /* BitByteData in Frameworks */,
 				50527FFC26CFF6A600FD846D /* FluentIcon in Frameworks */,
 				50A8053326CB833D00F8FB7D /* LNPopupController-Static in Frameworks */,
+				50940CA227C618D400075B48 /* PathListTableViewController in Frameworks */,
 				507D1E9126BFA8BF00E72E9B /* AptRepository in Frameworks */,
 				507D1E7726BFA88500E72E9B /* SWCompression in Frameworks */,
 				50A283EF26D54492005FA2DB /* SwiftMD5 in Frameworks */,
 				507D1E8D26BFA8B700E72E9B /* Cosmos in Frameworks */,
+				5037FB6628470117009BB103 /* Tuner in Frameworks */,
 				507D1E7926BFA88D00E72E9B /* SnapKit in Frameworks */,
 				508AF3F426CB8F66000A2EC6 /* JsonDepiction in Frameworks */,
 				500D83AA26C2158600D9E701 /* SPIndicator in Frameworks */,
@@ -839,6 +847,8 @@
 				505BB6CC26D78235007F5B15 /* Renet */,
 				50435E9526DBD35100D3ED25 /* Bugsnag */,
 				50CF5828276049A8003AA45B /* AuxiliaryExecute */,
+				50940CA127C618D400075B48 /* PathListTableViewController */,
+				5037FB6528470117009BB103 /* Tuner */,
 			);
 			productName = Protein;
 			productReference = 50D528B82449B11300F4A483 /* chromatic.app */;
@@ -872,6 +882,10 @@
 				"pt-BR",
 				de,
 				Base,
+				fr,
+				it,
+				ru,
+				tr,
 			);
 			mainGroup = 50D528AF2449B11300F4A483;
 			productRefGroup = 50D528B92449B11300F4A483 /* Products */;
@@ -911,6 +925,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		501433FB26D0CDB80042A048 /* Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -929,6 +944,7 @@
 		};
 		501433FC26D0CE6C0042A048 /* Bartycrouch Update */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1079,6 +1095,10 @@
 				5087445526F6397800DA9EC8 /* ja */,
 				5087445626F6398200DA9EC8 /* pt-BR */,
 				509C526C26F9C43300116616 /* de */,
+				50CC2FA027A105E700BA2042 /* fr */,
+				50CC2FA127A1060400BA2042 /* it */,
+				50CC2FA227A1061700BA2042 /* ru */,
+				50A2D69A27A51101006B61DE /* tr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1207,15 +1227,17 @@
 		50D5290D2449B11600F4A483 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Chromatic/Chromatic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 100;
-				DEVELOPMENT_TEAM = GXZ23M5TP2;
+				DEVELOPMENT_TEAM = VXCY5K2T3N;
 				DOCKER_SHOULD_BUILD = NO;
-				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = NO;
+				ENABLE_BITCODE = NO;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/Chromatic/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1241,15 +1263,16 @@
 		50D5290E2449B11600F4A483 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Chromatic/Chromatic.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 100;
-				DEVELOPMENT_TEAM = GXZ23M5TP2;
+				DEVELOPMENT_TEAM = "";
 				DOCKER_SHOULD_BUILD = NO;
-				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = NO;
+				ENABLE_BITCODE = NO;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Chromatic/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.1;
@@ -1261,8 +1284,7 @@
 				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = wiki.qaq.chromatic;
 				PRODUCT_NAME = chromatic;
-				PROVISIONING_PROFILE_SPECIFIER = "QAQ Wiki iOS Distribution";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = ./Chromatic/Backend/Common/Bridge.h;
 				SWIFT_VERSION = 5.0;
@@ -1301,6 +1323,10 @@
 		500D83A926C2158600D9E701 /* SPIndicator */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SPIndicator;
+		};
+		5037FB6528470117009BB103 /* Tuner */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Tuner;
 		};
 		50435E9526DBD35100D3ED25 /* Bugsnag */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1369,6 +1395,10 @@
 		508AF3F326CB8F66000A2EC6 /* JsonDepiction */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = JsonDepiction;
+		};
+		50940CA127C618D400075B48 /* PathListTableViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PathListTableViewController;
 		};
 		50A283EE26D54492005FA2DB /* SwiftMD5 */ = {
 			isa = XCSwiftPackageProductDependency;

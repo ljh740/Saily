@@ -74,7 +74,7 @@ class PackageBannerView: UIView {
         button.snp.makeConstraints { x in
             x.centerY.equalToSuperview()
             x.right.equalToSuperview().offset(-20)
-            x.width.equalTo(60)
+            x.width.equalTo(50)
             x.height.equalTo(30)
         }
         buttonBackground.backgroundColor = .systemOrange
@@ -87,7 +87,7 @@ class PackageBannerView: UIView {
         }
         buttonAnchor.snp.makeConstraints { x in
             x.trailing.equalTo(buttonBackground)
-            x.top.equalTo(buttonBackground.snp.bottom).offset(4)
+            x.top.equalTo(buttonBackground.snp.bottom).offset(10)
             x.height.equalTo(2)
             x.width.equalTo(250)
         }
@@ -113,6 +113,23 @@ class PackageBannerView: UIView {
         version.text = package.latestVersion ?? "0.0.0.???"
         icon.image = UIImage(named: "PackageDefaultIcon")
         button.setTitle(grabButtonString(), for: .normal)
+
+        // now we need to update button size from localized string
+        var width = button.intrinsicContentSize.width
+        if width < 50 { width = 50 }
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0,
+            usingSpringWithDamping: 1.0,
+            initialSpringVelocity: 0.8,
+            options: .curveEaseInOut
+        ) {
+            self.button.snp.updateConstraints { make in
+                make.width.equalTo(width + 10) // so min would be 60
+            }
+            self.button.layoutIfNeeded()
+        } completion: { _ in }
+
         if let iconUrl = PackageCenter.default.avatarUrl(with: package) {
             SDWebImageManager
                 .shared

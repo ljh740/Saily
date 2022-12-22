@@ -27,6 +27,7 @@ class TaskProcessor {
         let install: [(String, URL)]
         let remove: [String]
         let requiresRestart: Bool
+        var dryRun: Bool = false
 
         internal init(install: [(String, URL)], remove: [String]) {
             self.install = install
@@ -77,7 +78,12 @@ class TaskProcessor {
                         return nil
                     }
                     let filename = path.lastPathComponent
-                    let dest = workingLocation.appendingPathComponent(filename)
+                    var dest = workingLocation.appendingPathComponent(filename)
+                    // workaround for paid package not putting .deb in their download url
+                    // digger nor cariol network should handle this, they are only the downloader
+                    if dest.pathExtension != "deb" {
+                        dest.appendPathExtension("deb")
+                    }
                     try FileManager.default.copyItem(at: path, to: dest)
                     installList.append((item.identity, dest))
                 }
@@ -87,6 +93,42 @@ class TaskProcessor {
             return nil
         }
         return .init(install: installList, remove: remove)
+    }
+
+    func generateMockCommandScript(operation: OperationPaylad) -> String {
+        var returnString = ""
+        returnString += [
+            AuxiliaryExecuteWrapper.rm,
+            "-f",
+            "/var/lib/apt/lists/lock",
+            "/var/cache/apt/archives/lock",
+            "/var/lib/dpkg/lock",
+        ].joined(separator: " \\\n ") + "\n\n"
+        if operation.remove.count > 0 {
+            returnString += [
+                AuxiliaryExecuteWrapper.apt,
+                "remove",
+                "--assume-yes",
+                "--allow-remove-essential",
+                operation.remove.map { $0 }.joined(separator: " \\\n "),
+            ].joined(separator: " \\\n ") + "\n\n"
+        }
+        if operation.install.count > 0 {
+            returnString += [
+                AuxiliaryExecuteWrapper.apt,
+                "install",
+                "--assume-yes",
+                "--reinstall", "--allow-downgrades", "--allow-change-held-packages",
+                "-oquiet::NoUpdate=true", "-oApt::Get::HideAutoRemove=true",
+                "-oquiet::NoProgress=true", "-oquiet::NoStatistic=true",
+                "-oAPT::Get::Show-User-Simulation-Note=False",
+                "-oAcquire::AllowUnsizedPackages=true",
+                "-oDir::State::lists=",
+                "-oDpkg::Options::=--force-confdef",
+                operation.install.map(\.1.path).joined(separator: " \\\n "),
+            ].joined(separator: " \\\n ") + "\n\n"
+        }
+        return returnString
     }
 
     func beginOperation(operation: OperationPaylad, output: @escaping (String) -> Void) {
@@ -103,7 +145,8 @@ class TaskProcessor {
 
         // MARK: - REMOVE LOCKS
 
-        do {
+        repeat {
+            if operation.dryRun { break }
             output("\n===>\n")
             output(NSLocalizedString("UNLOCKING_SYSTEM", comment: "Unlocking system") + "\n")
             let result = AuxiliaryExecuteWrapper.rootspawn(command: AuxiliaryExecuteWrapper.rm,
@@ -115,11 +158,11 @@ class TaskProcessor {
                 output(str)
             }
             output("[*] returning \(result.0)\n")
-        }
+        } while false
 
         // MARK: - UNINSTALL IF REQUIRED
 
-        do {
+        repeat {
             if operation.remove.count > 0 {
                 output("\n===>\n")
                 output(NSLocalizedString("BEGIN_UNINSTALL", comment: "Begin uninstall") + "\n")
@@ -128,6 +171,7 @@ class TaskProcessor {
                     "--assume-yes", // --force-yes is deprecated, use --allow
                     "--allow-remove-essential",
                 ]
+                if operation.dryRun { arguments.append("--dry-run") }
                 operation.remove.forEach { item in
                     arguments.append(item)
                 }
@@ -139,11 +183,11 @@ class TaskProcessor {
                 }
                 output("[*] returning \(result.0)\n")
             }
-        }
+        } while false
 
         // MARK: - INSTALL IF REQUIRED
 
-        do {
+        repeat {
             if operation.install.count > 0 {
                 output("\n===>\n")
                 output(NSLocalizedString("BEGIN_INSTALL", comment: "Begin install") + "\n")
@@ -159,7 +203,12 @@ class TaskProcessor {
                     "-oDir::State::lists=",
                     "-oDpkg::Options::=--force-confdef",
                 ]
-
+                if operation.dryRun {
+                    arguments.append("--dry-run")
+                    if operation.remove.count > 0 {
+                        output("\n[i] Dry run with uninstall may not report correctly\n")
+                    }
+                }
                 operation.install.forEach { item in
                     arguments.append(item.1.path)
                 }
@@ -171,11 +220,12 @@ class TaskProcessor {
                 }
                 output("[*] returning \(result.0)\n")
             }
-        }
+        } while false
 
         // MARK: - NOW LET'S CHECK WHAT WE HAVE WRITTEN
 
-        do {
+        repeat {
+            if operation.dryRun { break }
             var modifiedAppList = Set<String>()
             var lookup = [String: String]()
             var dpkgList = (
@@ -224,11 +274,12 @@ class TaskProcessor {
                                                                timeout: 10) { _ in }
                 output("[*] returning \(result.0)\n")
             }
-        }
+        } while false
 
         // MARK: - UICACHE FOR REMVAL ITEMS
 
-        do {
+        repeat {
+            if operation.dryRun { break }
             let currentApplicationList = (
                 (
                     try? FileManager.default.contentsOfDirectory(atPath: "/Applications")
@@ -255,7 +306,7 @@ class TaskProcessor {
                                                                timeout: 10) { _ in }
                 output("[*] returning \(result.0)\n")
             }
-        }
+        } while false
 
         output("\n\n\n\(NSLocalizedString("OPERATION_COMPLETED", comment: "Operation Completed"))\n")
 
@@ -263,8 +314,11 @@ class TaskProcessor {
 
         InterfaceBridge.removeRecoveryFlag(with: #function, userRequested: false)
         PackageCenter.default.realodLocalPackages()
-        TaskManager.shared.clearActions()
-        AppleCardColorProvider.shared.addColor(withCount: 1)
+
+        if !operation.dryRun {
+            TaskManager.shared.clearActions()
+            AppleCardColorProvider.shared.addColor(withCount: 1)
+        }
 
         inProcessingQueue = false
         accessLock.unlock()

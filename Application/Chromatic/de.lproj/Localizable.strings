@@ -31,6 +31,9 @@
 /* Author */
 "AUTHOR" = "Autor";
 
+/* Automatically */
+"AUTOMATICALLY" = "Automatically";
+
 /* Available Versions */
 "AVAILABLE_VERSIONS" = "Verfügbare Versionen";
 
@@ -100,6 +103,9 @@
 /* Copy Meta */
 "COPY_META" = "Meta kopieren";
 
+/* Copy Script */
+"COPY_SCRIPT" = "Skript kopieren";
+
 /* Current Installed */
 "CURRENT_INSTALLED" = "Aktuell installiert";
 
@@ -107,7 +113,7 @@
 "CURRENT_SELECTED" = "Momentan ausgewählt";
 
 /* Dashboard */
-"DASHBOARD" = "Dashboard";
+"DASHBOARD" = "Übersicht";
 
 /* Delete */
 "DELETE" = "Löschen";
@@ -117,6 +123,9 @@
 
 /* Deleted */
 "DELETED" = "Gelöscht";
+
+/* Depiction */
+"DEPICTION" = "Depiction";
 
 /* Details */
 "DETAILS" = "Details";
@@ -145,6 +154,9 @@
 /* Downgrade */
 "DOWNGRADE" = "Downgrade";
 
+/* Download */
+"DOWNLOAD" = "Download";
+
 /* Your download can be resumed any time. */
 "DOWNLOAD_CAN_RESUME_ANY_TIME" = "Ihr Download kann jederzeit fortgesetzt werden.";
 
@@ -153,6 +165,9 @@
 
 /* Downloading */
 "DOWNLOADING" = "Lade herunter";
+
+/* Dry Run */
+"DRY_RUN" = "Dry Run";
 
 /* Enable History */
 "ENABLE_HISTORY" = "Verlauf aktivieren";
@@ -177,6 +192,9 @@
 
 /* Essential package in removal queue, this may brick your device. */
 "ESSENTIAL_PACKAG_IN_REMOVE_QUEUE" = "Notwenidges Paket in der Entfernungswarteschlange, dies kann dein Gerät schädigen.";
+
+/* Execute */
+"EXECUTE" = "Execute";
 
 /* Failed to create operation payload, incomplete download or broken resources. Please try again later. */
 "FAILED_TO_CREATE_PAYLOAD_MAYBE_DOWNLOAD_FAILED" = "Fehler beim Erstellen der Operationsnutzlast, unvollständiger Download oder defekte Ressourcen. Bitte versuche es später erneut.";
@@ -253,6 +271,9 @@
 /* Name */
 "NAME" = "Name";
 
+/* Native */
+"NATIVE" = "Native";
+
 /* Network Timeout */
 "NETWORK_TIMEOUT" = "Netzwerk-Timeout";
 
@@ -268,11 +289,20 @@
 /* No Update Required */
 "NO_UPDATE_REQUIRED" = "Kein Update erforderlich";
 
+/* None */
+"NONE" = "None";
+
 /* Not Available */
 "NOT_AVAILABLE" = "Nicht verfügbar";
 
 /* Not Modified */
 "NOT_MODIFIED" = "Nicht geändert";
+
+/* Native Only */
+"ONLY_NATIVE" = "Native Only";
+
+/* Web Only */
+"ONLY_WEB" = "Web Only";
 
 /* Open Download */
 "OPEN_DOWNLOAD" = "Download-Ordner öffnen";
@@ -308,7 +338,7 @@
 "PASTEBOARD_REPO_DESCRIPTION" = "Wir haben diese Links in der Zwischenablage gefunden.";
 
 /* Press add button above to add some */
-"PLEASE_ADD_REPO" = "Klicke oben, um einige Quellen hinzuzufügen.";
+"PLEASE_ADD_REPO" = "Klicke oben auf die Schaltfläche Hinzufügen, um einige Quellen hinzuzufügen.";
 
 /* Preparing Operations */
 "PREPARING_OPERATIONS" = "Vorgänge vorbereiten";
@@ -409,6 +439,9 @@
 /* Resumed */
 "RESUMED" = "Fortgesetzt";
 
+/* Reveal Files */
+"REVEAL_FILES" = "Reveal Files";
+
 /* Search */
 "SEARCH" = "Suchen";
 
@@ -494,7 +527,7 @@
 "UNPACKING_PACKAGE" = "Paket auspacken";
 
 /* Update */
-"UPDATE" = "Update";
+"UPDATE" = "Aktualisierung";
 
 /* Update All */
 "UPDATE_ALL" = "Alles aktualisieren";
@@ -507,6 +540,9 @@
 
 /* Update When Available */
 "UPDATE_WHEN_AVAILABLE" = "Autom. Aktualisieren";
+
+/* User Agent */
+"USER_AGENT" = "User Agent";
 
 /* Validating... */
 "VALIDATING..." = "Prüfen...";
@@ -522,6 +558,9 @@
 
 /* Version Control */
 "VERSION_CONTROL" = "Verfügbare Versionen";
+
+/* Web */
+"WEB" = "Web";
 
 /* While the world sleeps, we dream! */
 "WELCOME_CARD_DESC" = "Während die Welt schläft, träumen wir.";

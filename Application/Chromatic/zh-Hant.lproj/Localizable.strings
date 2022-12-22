@@ -31,6 +31,9 @@
 /* Author */
 "AUTHOR" = "作者";
 
+/* Automatically */
+"AUTOMATICALLY" = "自动";
+
 /* Available Versions */
 "AVAILABLE_VERSIONS" = "可用版本";
 
@@ -100,6 +103,9 @@
 /* Copy Meta */
 "COPY_META" = "複製元數據";
 
+/* Copy Script */
+"COPY_SCRIPT" = "複製腳本";
+
 /* Current Installed */
 "CURRENT_INSTALLED" = "目前已安裝";
 
@@ -117,6 +123,9 @@
 
 /* Deleted */
 "DELETED" = "已刪除";
+
+/* Depiction */
+"DEPICTION" = "详情与描述";
 
 /* Details */
 "DETAILS" = "詳細資訊";
@@ -145,6 +154,9 @@
 /* Downgrade */
 "DOWNGRADE" = "降級";
 
+/* Download */
+"DOWNLOAD" = "下載";
+
 /* Your download can be resumed any time. */
 "DOWNLOAD_CAN_RESUME_ANY_TIME" = "您可以隨時恢復下載";
 
@@ -153,6 +165,9 @@
 
 /* Downloading */
 "DOWNLOADING" = "下載中";
+
+/* Dry Run */
+"DRY_RUN" = "試運行";
 
 /* Enable History */
 "ENABLE_HISTORY" = "啟用歷史";
@@ -177,6 +192,9 @@
 
 /* Essential package in removal queue, this may brick your device. */
 "ESSENTIAL_PACKAG_IN_REMOVE_QUEUE" = "在移除隊列中有基本軟體，移除將可能導致設備變磚";
+
+/* Execute */
+"EXECUTE" = "執行";
 
 /* Failed to create operation payload, incomplete download or broken resources. Please try again later. */
 "FAILED_TO_CREATE_PAYLOAD_MAYBE_DOWNLOAD_FAILED" = "創建操作酬載失敗，下載不完整或已損毀的資源，請稍候再嘗試";
@@ -253,6 +271,9 @@
 /* Name */
 "NAME" = "名稱";
 
+/* Native */
+"NATIVE" = "原生";
+
 /* Network Timeout */
 "NETWORK_TIMEOUT" = "網路逾時";
 
@@ -268,11 +289,20 @@
 /* No Update Required */
 "NO_UPDATE_REQUIRED" = "無需更新";
 
+/* None */
+"NONE" = "无";
+
 /* Not Available */
 "NOT_AVAILABLE" = "無法使用";
 
 /* Not Modified */
 "NOT_MODIFIED" = "未修改";
+
+/* Native Only */
+"ONLY_NATIVE" = "仅原生";
+
+/* Web Only */
+"ONLY_WEB" = "仅网页";
 
 /* Open Download */
 "OPEN_DOWNLOAD" = "開啟下載位址資料夾";
@@ -410,6 +440,9 @@
 /* Resumed */
 "RESUMED" = "已恢復";
 
+/* Reveal Files */
+"REVEAL_FILES" = "显示安装文件";
+
 /* Search */
 "SEARCH" = "搜尋";
 
@@ -509,6 +542,9 @@
 /* Update When Available */
 "UPDATE_WHEN_AVAILABLE" = "有可用更新時自動更新";
 
+/* User Agent */
+"USER_AGENT" = "代理用戶";
+
 /* Validating... */
 "VALIDATING..." = "驗證中...";
 
@@ -523,6 +559,9 @@
 
 /* Version Control */
 "VERSION_CONTROL" = "版本控制";
+
+/* Web */
+"WEB" = "网页";
 
 /* While the world sleeps, we dream! */
 "WELCOME_CARD_DESC" = "愛慕星雲的人穿梭在不為人知的天方夜譚";

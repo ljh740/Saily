@@ -18,13 +18,13 @@ extension InterfaceBridge {
     static func calculatesPackageCellSize(availableWidth available: CGFloat, andItemsPerRow: inout Int) -> CGSize {
         debugPrint("calculatesPackageCellSize \(available)")
 
-        var itemsPerRow: Int = 1
+        var itemsPerRow = 1
         let padding: CGFloat = 8
         var result = CGSize()
         result.width = 2000
 
         // get me the itemsPerRow
-        let maximumWidth: CGFloat = 300 // soft limit
+        let maximumWidth: CGFloat = 280 // soft limit
         // | padding [minimalWidth] padding [minimalWidth] padding |
         if available > maximumWidth * 2 + padding * 3 {
             // just in case, dont loop forever
@@ -72,7 +72,10 @@ extension InterfaceBridge {
                 .allMenuActions
                 .filter { $0.elegantForPerform(package) }
                 .map { action in
-                    UIAction(title: action.descriptor.describe()) { _ in action.block(package, fromView) }
+                    UIAction(
+                        title: action.descriptor.describe(),
+                        image: action.descriptor.icon()
+                    ) { _ in action.block(package, fromView) }
                 }
             return UIMenu(title: "", children: actions)
         }

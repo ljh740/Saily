@@ -38,6 +38,9 @@
       location = "group:Foundation/Digger">
    </FileRef>
    <FileRef
+      location = "group:Foundation/DTPhotoViewerController">
+   </FileRef>
+   <FileRef
       location = "group:Foundation/FLAnimatedImage">
    </FileRef>
    <FileRef
@@ -51,6 +54,9 @@
    </FileRef>
    <FileRef
       location = "group:Foundation/LTMorphingLabel">
+   </FileRef>
+   <FileRef
+      location = "group:Foundation/PathListTableViewController">
    </FileRef>
    <FileRef
       location = "group:Foundation/PropertyWrapper">
@@ -78,5 +84,8 @@
    </FileRef>
    <FileRef
       location = "group:Foundation/SwiftThrottle">
+   </FileRef>
+   <FileRef
+      location = "group:Foundation/Tuner">
    </FileRef>
 </Workspace>

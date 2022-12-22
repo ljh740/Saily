@@ -7,7 +7,9 @@
 //
 
 #import "BugsnagHandledState.h"
-#import "BugsnagKeys.h"
+
+#import "BSGDefines.h"
+#import "BSGKeys.h"
 
 BSGSeverity BSGParseSeverity(NSString *severity) {
     if ([severity isEqualToString:BSGKeyInfo])
@@ -48,6 +50,7 @@ static NSString *const kHandledException = @"handledException";
 static NSString *const kUserSpecifiedSeverity = @"userSpecifiedSeverity";
 static NSString *const kUserCallbackSetSeverity = @"userCallbackSetSeverity";
 
+BSG_OBJC_DIRECT_MEMBERS
 @implementation BugsnagHandledState
 
 + (instancetype)handledStateFromJson:(NSDictionary *)json {
